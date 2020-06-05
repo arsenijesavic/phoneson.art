@@ -39,6 +39,7 @@ collections:
       - label: Composers
         name: "Composers"
         widget: "relation"
+        multiple: true
         collection: "composers"
         searchFields: ["name"]
         valueField: "name"
