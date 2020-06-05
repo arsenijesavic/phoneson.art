@@ -1,17 +1,66 @@
 backend:
   name: git-gateway
   branch: master
+  commit_messages:
+    create: "Create {{collection}} “{{slug}}”"
+    update: "Update {{collection}} “{{slug}}”"
+    delete: "Delete {{collection}} “{{slug}}”"
+    uploadMedia: "[skip ci] Upload “{{path}}”"
+    deleteMedia: "[skip ci] Delete “{{path}}”"
+
 media_folder: public/images
-public_folder: images
+public_folder: /images
+
 collections:
+  - name: compositions
+    label: Compositions
+    label_singular: "Composition"
+    folder: content/compositions
+    create: true
+    slug: "{{name}}"
+    path: "{{slug}}/index"
+    fields:
+      - label: "_type"
+        name: "_type"
+        widget: "hidden"
+        default: "composition"
+      - label: Slug
+        name: slug
+        widget: string
+      - label: Name
+        name: name
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: "Photo"
+        name: "photo"
+        widget: "image"
+      - label: Composers
+        name: "Composers"
+        widget: "relation"
+        collection: "composers"
+        searchFields: ["name"]
+        valueField: "name"
+        displayFields: ["name"]
+
   - name: composers
     label: Composers
     label_singular: "Composer"
     folder: content/composers
-    path: "{{slug}}/index"
-    media_folder: ""
-    public_folder: ""
+    create: true
+    slug: "{{name}}"
+    # path: "{{slug}}/index"
+    # media_folder: ""
+    # public_folder: ""
     fields:
+      - label: "_type"
+        name: "_type"
+        widget: "hidden"
+        default: "composers"
+      - label: Slug
+        name: slug
+        widget: string
       - label: Name
         name: name
         widget: string
