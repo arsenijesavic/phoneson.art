@@ -1,6 +1,7 @@
+[[plugins]]
+  package = "netlify-plugin-cache-nextjs"
+
 [build]
   command = "node scripts/source-markdown.js && npm run build && npm run export"
   publish = "out"
 
-[[plugins]]
-  package = "netlify-plugin-cache-nextjs"
