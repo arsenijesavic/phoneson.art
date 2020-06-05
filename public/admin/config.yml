@@ -18,7 +18,7 @@ collections:
     folder: content/compositions
     create: true
     slug: "{{name}}"
-    media_folder: public/images
+    media_folder: /public/images
     public_folder: /images
     path: "{{slug}}/index"
     fields:
@@ -46,8 +46,8 @@ collections:
         searchFields: ["name"]
         valueField: "name"
         displayFields: ["name"]
-      - label: "Body"
-        name: "body"
+      - label: "Instructions"
+        name: "instructions"
         widget: "markdown"
 
   - name: composers
@@ -56,8 +56,7 @@ collections:
     folder: content/composers
     create: true
     slug: "{{name}}"
-    # path: "{{slug}}/index"
-    media_folder: public/images
+    media_folder: /public/images
     public_folder: /images
     fields:
       - label: "_type"
