@@ -11,7 +11,6 @@ const Composiiton = ({
   description,
   onClose,
 }) => {
-  console.log(slug);
   return (
     <>
       {/* <motion.div

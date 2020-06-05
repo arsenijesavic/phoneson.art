@@ -1,14 +1,12 @@
 import { get } from "lib/api";
 
 export default ({ data }) => {
-  console.log(data);
-
   return (
     <div className="max-w-screen-lg mx-auto min-h-screen px-4 pb-32 text-gray-100">
       <div>
         <h1 className="text-4xl sm:text-6xl text-center ">{data.name}</h1>
         <div className="w-full sm:px-48">
-          <img className="w-full rounded-20" src={`/${data.photo}`} alt="" />
+          <img className="w-full rounded-20" src={data.photo} alt={data.name} />
         </div>
       </div>
 
@@ -52,10 +50,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const [data] = await get(
-    `*[_type == 'composers' && slug == '/composers/${params.name}']|order(date desc) [0..10]{
-      ...,
-      "compositors": *[_type == 'composers' && name in ^.compositors[]]
-    }`
+    `*[_type == 'composers' && slug == '/composers/${params.name}']`
   );
 
   return {
