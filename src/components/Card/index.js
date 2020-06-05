@@ -1,27 +1,36 @@
 import { motion } from "framer-motion";
 
-const Card = ({ id, name, category, image, theme, onClick }) => {
+const Card = ({ id, name, compositors, photo, onClick }) => {
   return (
-    <li className={`card ${theme}`} onClick={onClick}>
+    <li className="card cursor-pointer" onClick={onClick}>
       <div className="card-content-container">
         <motion.div className="card-content" layoutId={`card-container-${id}`}>
           <motion.div
             className="card-image-container"
             layoutId={`card-image-container-${id}`}
           >
-            <img className="card-image" src={`images/${image}`} alt="" />
-          </motion.div>
-
-          <motion.div
-            className="title-container"
-            layoutId={`title-container-${id}`}
-          >
-            <span className="category">{category}</span>
-            <h2>{name}</h2>
+            <motion.div
+              className="title-container"
+              layoutId={`title-container-${id}`}
+            >
+              <ul>
+                {compositors.map((composer, index) => (
+                  <li
+                    key={index}
+                    className="font-regular text-base text-red-700 uppercase"
+                  >
+                    {composer.name}
+                  </li>
+                ))}
+              </ul>
+              <h2 className="font-extrabold text-4xl leading-none mt-2 text-gray-100">
+                {name}
+              </h2>
+            </motion.div>
+            <img className="card-image" src={photo} alt="" />
           </motion.div>
         </motion.div>
       </div>
-      {/* <Link to={id} className={`card-open-link`} /> */}
     </li>
   );
 };

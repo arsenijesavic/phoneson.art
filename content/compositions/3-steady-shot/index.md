@@ -1,10 +1,9 @@
 ---
+_type: "composition"
+slug: /compositions/steady-shot
 name: Steady Shot
 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-photo: "./3-steady-shot.jpg"
+photo: "images/03-johannes-kreidler-sready-shot.jpg"
 compositors:
-  - name: Goethe-Institut Serbien
-    logo: /goethe-logo.svg
-  - name: Nova Iskra
-    logo: /nova-iskra-logo.svg
+  - Johannes Kreidler
 ---

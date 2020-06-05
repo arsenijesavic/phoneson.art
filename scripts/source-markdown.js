@@ -8,17 +8,17 @@ glob("**/*.md", (error, _files) => {
   const data = files.map((file) => {
     const _path = join(process.cwd(), file);
     const _md = fs.readFileSync(_path, "utf8");
-    const { data } = matter(_md);
-    console.log(data);
+    const { data, content: body } = matter(_md);
 
     return {
       fileAbsolutePath: _path,
       ...data,
+      body,
     };
   });
 
   fs.writeFile("./content/markdown.json", JSON.stringify(data), (err) => {
     if (err) console.error("ERROR", err);
-    console.info("DONE");
+    console.info("✅ Source Markdown");
   });
 });

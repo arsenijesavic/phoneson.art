@@ -1,7 +1,9 @@
 ---
+_type: "composers"
+slug: /composers/david-helbich
 name: "David Helbich"
-photo: ""
-country: ""
-website: ""
-biography: ""
+photo: "images/david-helbich.jpg"
+country: "Germany"
+website: "http://davidhelbich.blogspot.com/"
+biography: "David Helbich (1973, Germany) is a sound-, installation- and performance artist, as well as a photographer and teacher, who creates various experimental conceptual works for the stage, paper and online media and in pubic space. His trajectory moves between representative and interactive works, pieces and interventions, between conceptual work and actions. His concepts are often presented in print, such as photo and illustrated score books as well as in live performances, sound interventions, audio guides and on social media. Many of his works address concrete physical and social experiences. A recurrent interest is the direct work with a self-performing audience. In the last 15 years, his work has been shown all over Europe, and recently presented a.o. at Martin-Gropius-Bau (Berlin), Palais de Tokyo (Paris), Oude Kerk (Amsterdam), Queens Museum and UnionDocs (New York) and Café OTO (London). Helbich received the First Prize for the composition award ‘ad libitum’ (Stuttgart) for his piano book “Fur aufrichtiges Klavier” (2011). He is the author of the bestselling photo books “Belgian solutions” – volume 1 and volume 2 (Luster, Antwerp). Both have recently being added to the national photo book heritage collection, catalogue and exhibition “Photobook Belge” (FOMU-Antwerp).In 2016, Helbich was granted a three-years scholarship for artistic development and research by the Flemish community. Helbich also teaches at music and dance academies in Europe and collaborates with choreographers such as Mette Edvardsen (NO/BE) and Heike Langsdorf (DE/BE). Helbich has been living and working in Brussels since 2002. He studied composition in Amsterdam and Freiburg."
 ---
