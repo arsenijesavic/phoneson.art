@@ -38,14 +38,17 @@ collections:
       - label: "Photo"
         name: "photo"
         widget: "image"
-      - label: Composers
-        name: "composers"
+      - label: Compositors
+        name: "compositors"
         widget: "relation"
         multiple: true
         collection: "composers"
         searchFields: ["name"]
         valueField: "name"
         displayFields: ["name"]
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
 
   - name: composers
     label: Composers
