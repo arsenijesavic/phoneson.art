@@ -18,6 +18,8 @@ collections:
     folder: content/compositions
     create: true
     slug: "{{name}}"
+    media_folder: public/images
+    public_folder: /images
     path: "{{slug}}/index"
     fields:
       - label: "_type"
@@ -37,7 +39,7 @@ collections:
         name: "photo"
         widget: "image"
       - label: Composers
-        name: "Composers"
+        name: "composers"
         widget: "relation"
         multiple: true
         collection: "composers"
@@ -52,8 +54,8 @@ collections:
     create: true
     slug: "{{name}}"
     # path: "{{slug}}/index"
-    # media_folder: ""
-    # public_folder: ""
+    media_folder: public/images
+    public_folder: /images
     fields:
       - label: "_type"
         name: "_type"
