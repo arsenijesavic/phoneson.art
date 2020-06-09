@@ -1,130 +1,14 @@
-import React, { forwardRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { get } from "lib/api";
+import useDeviceMotion from "hooks/useDeviceMotion";
 
 // import styled from "styled-components";
 
-const Trigger = ({ title, src, background, color }) => {
-  const sound = React.createRef();
-
-  const _handlePress = () => {
-    sound.current.currentTime = 0;
-    sound.current.play();
-  };
-
-  return (
-    <button
-      style={{ background, color, minWidth: "50%" }}
-      className="text-center text-4xl flex justify-center items-center flex-1 bg-red-500 text-black"
-      onClick={_handlePress}
-    >
-      {title}
-      <audio ref={sound} src={src} />
-    </button>
-  );
-};
-
-const data = [
-  {
-    title: "1",
-    background: "#ED247B",
-    color: "white",
-    src: "/assets/7-menuer4phones/A/0.mp3",
-  },
-
-  {
-    title: "4",
-    background: "white",
-    color: "#ED247B",
-    src: "/assets/7-menuer4phones/A/3.mp3",
-  },
-
-  {
-    title: "2",
-    background: "#FB932D",
-    color: "white",
-    src: "/assets/7-menuer4phones/A/1.mp3",
-  },
-  {
-    title: "5",
-    background: "white",
-    color: "#FB932D",
-    src: "/assets/7-menuer4phones/A/4.mp3",
-  },
-
-  {
-    title: "3",
-    color: "white",
-    background: "#B153E9",
-    src: "/assets/7-menuer4phones/A/2.mp3",
-  },
-
-  {
-    title: "6",
-    color: "#B153E9",
-    background: "white",
-    src: "/assets/7-menuer4phones/A/5.mp3",
-  },
-
-  // {
-  //   title: "7",
-  //   color: "red",
-  //   background: "black",
-  //   src: "/assets/7-menuer4phones/A/Sound5.mp3",
-  // },
-];
-
-const data2 = [
-  {
-    title: "1",
-    background: "#DC3245",
-    color: "white",
-    src: "/assets/7-menuer4phones/B/0.mp3",
-  },
-  {
-    title: "4",
-    background: "white",
-    color: "#DC3245",
-    src: "/assets/7-menuer4phones/B/3.mp3",
-  },
-  {
-    title: "2",
-    background: "#696591",
-    color: "white",
-    src: "/assets/7-menuer4phones/B/1.mp3",
-  },
-  {
-    title: "5",
-    background: "white",
-    color: "#696591",
-    src: "/assets/7-menuer4phones/B/4.mp3",
-  },
-  {
-    title: "3",
-    background: "#1A9BBC",
-    color: "white",
-    src: "/assets/7-menuer4phones/B/2.mp3",
-  },
-  {
-    title: "6",
-    background: "white",
-    color: "#1A9BBC",
-    src: "/assets/7-menuer4phones/B/5.mp3",
-  },
-];
-
-const data3 = [
-  {
-    title: "J.S.Bach - Menuet",
-    background: "white",
-    color: "#1A9BBC",
-    src: "/assets/7-menuer4phones/C/J.S.Bach - Menuet.mp3",
-  },
-];
-
 export default ({ composition }) => {
   const router = useRouter();
-  const [selectedTab, setSelectedTab] = React.useState(0);
+  // const [selectedTab, setSelectedTab] = React.useState(0);
+  const { acceleration } = useDeviceMotion();
 
   return (
     <div className="w-full min-h-screen max-h-screen flex flex-col items-stretch">
@@ -156,42 +40,13 @@ export default ({ composition }) => {
             </ul>
           </div>
         </div>
-        <div className="flex-1 mt-6">
-          <ul className="flex bg-gray-900 text-gray-100 text-center">
-            {["Set A", "Set B", "Set C"].map((name, index) => (
-              <li
-                className={`flex-1 p-4 cursor-pointer border-red-500 ${
-                  index === selectedTab && "border-b-2"
-                } `}
-                onClick={() => setSelectedTab(index)}
-              >
-                {name}
-              </li>
-            ))}
-          </ul>
-        </div>
       </header>
 
-      {/* SoundBoard */}
-      {selectedTab === 0 && (
-        <div id="keys" className="flex-1 flex flex-wrap items-stretch">
-          {data && data.map((byte, index) => <Trigger key={index} {...byte} />)}
-        </div>
-      )}
+      <div className="flex-1 bg-red-400">
+        <h1>DATA</h1>
 
-      {selectedTab === 1 && (
-        <div id="keys" className="flex-1 flex flex-wrap items-stretch">
-          {data2 &&
-            data2.map((byte, index) => <Trigger key={index} {...byte} />)}
-        </div>
-      )}
-
-      {selectedTab === 2 && (
-        <div id="keys" className="flex-1 flex flex-wrap items-stretch">
-          {data3 &&
-            data3.map((byte, index) => <Trigger key={index} {...byte} />)}
-        </div>
-      )}
+        {JSON.stringify(acceleration)}
+      </div>
     </div>
   );
 };

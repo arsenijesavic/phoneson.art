@@ -37,7 +37,7 @@ const Composiiton = ({
               <ul>
                 {compositors.map((composer, index) => (
                   <li key={index}>
-                    <p className="font-regular text-xl text-red-700 uppercase">
+                    <p className="font-regular text-base text-gray-400 uppercase">
                       {composer.name}
                     </p>
                   </li>
