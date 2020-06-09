@@ -43,10 +43,11 @@ const Composiiton = ({
                   </li>
                 ))}
               </ul>
-              <h2 className="font-extrabold text-5xl leading-none mt-2 text-gray-100">
+              <h2 className="font-extrabold text-4xl leading-none mt-2 text-gray-100">
                 {name}
               </h2>
             </motion.div>
+
             <img className="card-image" src={photo} alt="" />
           </motion.div>
 
