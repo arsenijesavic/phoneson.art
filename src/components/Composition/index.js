@@ -23,7 +23,7 @@ const Composiiton = ({
         id="overlay"
         onClick={(e) => onClose(false)}
       ></motion.div> */}
-      <div className="card-content-container open">
+      <div className="card-content-container open z-50">
         <motion.div className="card-content" layoutId={`card-container-${id}`}>
           <motion.div
             onClick={(e) => onClose(false)}

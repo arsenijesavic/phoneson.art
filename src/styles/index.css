@@ -120,7 +120,7 @@ li {
   left: 0;
   right: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 100000000000000;
   overflow: scroll;
 
   /* padding: 40px 0; */
@@ -302,4 +302,9 @@ p {
 
 .playing {
   opacity: 0.3;
+}
+
+#ion-icon {
+  font-size: 32px;
+  color: white;
 }

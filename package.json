@@ -13,13 +13,12 @@
     "start": "next start"
   },
   "dependencies": {
-    "@sanity/imagetool": "^1.149.16",
     "framer-motion": "2.0.0-beta.41",
     "next": "^9.4.4",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "react-markdown": "^4.3.1",
-    "react-tabs": "^3.1.1"
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-ionicons": "^3.1.4",
+    "react-markdown": "^4.3.1"
   },
   "devDependencies": {
     "glob": "^7.1.6",
