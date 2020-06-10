@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import "../styles/index.css";
 
 const Layout = ({ children }) => {
-  const [isSplashVisible, setSplashVisible] = useState(false);
+  const [isSplashVisible, setSplashVisible] = useState(true);
   const router = useRouter();
 
   const activeRoute = router?.pathname;
@@ -14,26 +14,32 @@ const Layout = ({ children }) => {
   useEffect(() => {
     setTimeout(() => {
       setSplashVisible(false);
-    }, 1000);
+    }, 2000);
   }, [setSplashVisible]);
 
   return (
     <div className="w-full">
       {isSplashVisible && (
-        <div className="w-full h-full bg-blue-500 absolute top-0 left-0 right-0 z-50">
-          <div className="w-full h-screen flex justify-center items-center">
-            SPlash screen
+        <div className="w-full h-full bg-black text-white absolute top-0 left-0 right-0 z-50">
+          <div className="w-full h-screen flex flex-col justify-center items-center">
+            <h1 className="text-4xl font-bold">PHONES:ON</h1>
+            <p className="text-base leading-none">
+              web app for interactive performance
+            </p>
+            <p className="text-base leading-none">
+              of contemporary music with devices
+            </p>
           </div>
         </div>
       )}
 
-      <header className="sm:hidden w-full h-16 bg-red-700 text-center fixed top-0 left-0 z-30">
+      {/* <header className="sm:hidden w-full h-16 bg-red-700 text-center fixed top-0 left-0 z-30">
         <div className="w-full h-full flex justify-center items-center">
           <p className="text-base font-bold text-white">Perform</p>
         </div>
-      </header>
+      </header> */}
 
-      <div className="min-h-screen mt-16">{children}</div>
+      <div className="min-h-screen">{children}</div>
 
       <footer className="sm:hidden w-full  bg-gray-900 text-center fixed bottom-0 left-0 z-30 pt-2">
         <ul className="w-full h-full flex justify-center items-center">
@@ -44,8 +50,8 @@ const Layout = ({ children }) => {
               icon: ({ isActive }) => (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
+                  width="24"
+                  height="24"
                   viewBox="0 0 512 512"
                 >
                   <g fill="none" className="stroke-current">
@@ -71,8 +77,8 @@ const Layout = ({ children }) => {
               icon: ({ isActive }) => (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
+                  width="24"
+                  height="24"
                   viewBox="0 0 512 512"
                 >
                   <g fill="none" className="stroke-current">
@@ -109,8 +115,8 @@ const Layout = ({ children }) => {
               icon: ({ isActive }) => (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
+                  width="24"
+                  height="24"
                   viewBox="0 0 512 512"
                 >
                   <g fill="none" className="stroke-current">
