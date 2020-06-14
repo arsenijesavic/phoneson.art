@@ -49,7 +49,7 @@ export async function getStaticProps() {
 
 const List = ({ data, selectedId, onSelect }) => {
   return (
-    <ul className="card-list">
+    <ul className="card-list mb-48">
       {data.map((card) => (
         <Card
           key={card.id}
