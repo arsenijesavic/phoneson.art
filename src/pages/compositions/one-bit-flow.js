@@ -34,17 +34,19 @@ export default ({ composition }) => {
         </div>
       </header>
 
-      <div className="mt-8">
-        <p>
+      <div className="p-8">
+        <p className="text-base mt-4 leading-relaxed">
           To perform on any device with a web browser, ideally on a smartphone
         </p>
-        <p>Any duration, but usually more than 15 minutes</p>
-        <p>
+        <p className="text-base mt-4 leading-relaxed">
+          Any duration, but usually more than 15 minutes
+        </p>
+        <p className="text-base mt-4 leading-relaxed">
           Uses HTML5 Web Audio API. It is currently compatible with most modern
           desktop browsers, Chrome on Android phones and Chrome or Safari on
           iPhones.
         </p>
-        <p>
+        <p className="text-base mt-4 leading-relaxed">
           The program rhythmically repeats arpeggiated C power chord with C
           tuned to 132Hz. When you feel that the time is right, change it to the
           power chord a fifth upward, using the buttons below or the swipe
@@ -62,14 +64,14 @@ export default ({ composition }) => {
           The composition ends when you have used with all or most of the
           intervals.
         </p>
-        <p>
+        <p className="text-base mt-4 leading-relaxed">
           With every chord change the manner of arpeggio changes. The program
           goes through all the 4-permutations of 9 notes of a power chord
           distributed in three octaves. There are 3024 of them (9*8*7*6). There
           are 16 notes in each arpeggio phrase and four new permutations are
           selected on each chord change.
         </p>
-        <p>
+        <p className="text-base mt-4 leading-relaxed">
           Start and stop the music with Play/Pause button below. Perform the
           piece using the the four buttons next to it or the swipe panel below.
           Interval buttons have an immediate effect, while Chord buttons change
@@ -78,62 +80,37 @@ export default ({ composition }) => {
           respective four buttons. Each button triggers one of the following
           events.
         </p>
-        <ol>
+
+        <ol className="mt-6">
           <li>Move the chord one interval backward (Swipe left)</li>
           <li>Move the chord one interval forward (Swipe right)</li>
           <li>Change the interval a fifth backward (Swipe up)</li>
           <li>Change the interval a fifth forward (Swipe down)</li>
         </ol>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <button
-                  style={{ fontSize: "180%", height: "80px", width: "150px" }}
-                  id="btnPlayPause"
-                >
-                  ⏵⏸
-                </button>
-              </td>
-              <td>
-                <button
-                  style={{ fontSize: "120%", height: "80px", width: "150px" }}
-                  id="btnToggle1"
-                >
-                  Chord&lt;&lt;
-                </button>
-              </td>
-              <td>
-                <button
-                  style={{ fontSize: "120%", height: "80px", width: "150px" }}
-                  id="btnToggle0"
-                >
-                  Chord&gt;&gt;
-                </button>
-              </td>
-              <td>
-                <button
-                  style={{ fontSize: "120%", height: "80px", width: "150px" }}
-                  id="btnToggle3"
-                >
-                  Interval&lt;&lt;
-                </button>
-              </td>
-              <td>
-                <button
-                  style={{ fontSize: "120%", height: "80px", width: "150px" }}
-                  id="btnToggle2"
-                >
-                  Interval&gt;&gt;
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+
+        <div className="flex flex-row flex-wrap">
+          <button className="p-4" id="btnPlayPause">
+            ⏵⏸
+          </button>
+          <button className="p-4" id="btnToggle1">
+            Chord&lt;&lt;
+          </button>
+          <button className="p-4" id="btnToggle0">
+            Chord&gt;&gt;
+          </button>
+          <button className="p-4" id="btnToggle3">
+            Interval&lt;&lt;
+          </button>
+          <button className="p-4" id="btnToggle2">
+            Interval&gt;&gt;
+          </button>
+        </div>
+
         <br />
         <div className="w-full" id="touchsurface" style={{ height: "500px" }}>
           Swipe Panel
         </div>
+
         <h3>Last updated January 11th 2018</h3>
 
         <script

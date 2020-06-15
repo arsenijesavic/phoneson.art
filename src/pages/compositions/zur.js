@@ -5,9 +5,11 @@ import { Stage, Layer, Group, Circle } from "react-konva";
 import { Howl, Howler } from "howler";
 import * as Tone from "tone";
 
+import useMousePosition from "hooks/useMousePosition";
+
 // import useDeviceMotion from "hooks/useDeviceMotion";
 
-const _sounds = [
+const sounds = [
   {
     title: "1",
     background: "#ED247B",
@@ -55,7 +57,7 @@ const _sounds = [
   //   background: "black",
   //   src: "/assets/7-menuer4phones/A/Sound5.mp3",
   // },
-];
+].map((sound) => new Howl({ src: [sound.src], volume: 0.5 }));
 
 function intersections(a, b) {
   //this.x, this.y, other.x, other.y
@@ -80,67 +82,34 @@ function intersections(a, b) {
 }
 
 const Sketch = ({ layout }) => {
+  const mouse = useMousePosition();
+
   const [effects, setEffects] = useState();
 
   useEffect(() => {
-    // const filter = new Tone.AutoFilter({
-    //   frequency: 2,
-    //   depth: 0.9,
-    // })
-    //   .toMaster()
-    //   .start();
-    // const filter = new Tone.Filter(200, "highpass");
+    const delayFeed = new Tone.Signal(0.2, Tone.Frequency);
+    const delay = new Tone.PingPongDelay("4n", delayFeed.value).toMaster();
 
-    var lowPassFreq = new Tone.Signal(300, Tone.Frequency);
+    const player = new Tone.Player("/assets/drone.wav").toMaster();
+    player.autostart = true;
+    player.loop = true;
 
-    var lowPassFilter = new Tone.Filter({
-      type: "highpass",
-      frequency: lowPassFreq.value,
-    }).toMaster();
+    player.connect(delay);
 
-    const osc0 = new Tone.Oscillator({
-      volume: 0.4,
-      type: "square6",
-      frequency: "C4",
-    });
-
-    // osc0.connect(lowPassFilter).start();
-
-    setEffects({ lowPassFreq, lowPassFilter, osc0 });
+    setEffects({ delay, delayFeed, player });
   }, []);
-
-  const onMove = (e) => {
-    const { lowPassFreq, lowPassFilter } = effects;
-    // lowPassFreq.rampTo(e.target.value, 0.05);
-    // lowPassFilter.frequency.value = lowPassFreq.value;
-    // lowPassFilter.frequency.value = e.target.value;
-    const { value } = e.target;
-    console.log(value);
-    lowPassFilter.frequency.linearRampToValueAtTime(value, 0.5);
-    // filter.frequency = e.target.value;
-    // console.log(filter.frequency);
-    // frequency
-    // console.log(e.target.value);
-  };
-
-  const [sounds, setSounds] = useState(
-    _sounds.map((sound) => new Howl({ src: [sound.src] }))
-  );
 
   const [notes, setNotes] = useState([]);
   const requestRef = React.useRef();
 
   const updateNotes = (prevNotes) => {
-    console.log(layout);
-    const notes = prevNotes.map((note) => ({
-      ...note,
-      y: note.y + 1,
-      radius: 30,
-    }));
-    // .filter((note) => {
-    //   console.log(!note.y < 500);
-    //   return true;
-    // });
+    const notes = prevNotes
+      .map((note) => ({
+        ...note,
+        y: note.y + 1,
+        radius: 30,
+      }))
+      .filter((note) => note.y < layout.height);
 
     const r = Math.random();
     const prob = 0.01;
@@ -149,7 +118,7 @@ const Sketch = ({ layout }) => {
       const newNote = {
         x: Math.floor(Math.random() * layout.width - 50) + 50,
         y: 0,
-        radius: 50,
+        radius: Math.floor(Math.random() * 50),
       };
 
       // notes.forEach((note) => {
@@ -165,7 +134,6 @@ const Sketch = ({ layout }) => {
 
   const animate = (time) => {
     setNotes(updateNotes);
-
     requestRef.current = requestAnimationFrame(animate);
   };
 
@@ -176,19 +144,18 @@ const Sketch = ({ layout }) => {
 
   const handleOnNoteClick = (e, index) => {
     setNotes((prevNotes) => prevNotes.filter((_, i) => i !== index));
-    const indexToPlay = Math.floor(Math.random() * _sounds.length);
+    const indexToPlay = Math.floor(Math.random() * sounds.length);
     sounds[indexToPlay].play();
   };
 
   return (
-    <div className="w-full h-full">
+    <div>
       <Stage width={layout.width} height={layout.height}>
         <Layer>
           {notes?.map((note, index) => (
             <Circle
               key={index}
               {...note}
-              radius={50}
               fill="red"
               onClick={(e) => handleOnNoteClick(e, index)}
               onTap={(e) => handleOnNoteClick(e, index)}
@@ -207,8 +174,8 @@ export default ({ composition }) => {
   useEffect(() => {
     const width = wrapRef.current.offsetWidth;
     const height = wrapRef.current.offsetHeight;
-
-    setLayout({ width, height });
+    const _layout = { width, height };
+    setLayout(_layout);
   }, [wrapRef]);
 
   return (
@@ -259,7 +226,5 @@ export async function getStaticProps({ params }) {
     }`
   );
 
-  return {
-    props: { composition },
-  };
+  return { props: { composition } };
 }
