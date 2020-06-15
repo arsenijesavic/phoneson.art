@@ -11,7 +11,7 @@ const Composiiton = ({
   onClose,
 }) => {
   return (
-    <div className="card-content-container open z-50 pb-48">
+    <div className="card-content-container open z-50">
       <motion.div className="card-content" layoutId={`card-container-${id}`}>
         <motion.div
           onClick={(e) => onClose(false)}

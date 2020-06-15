@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import "../styles/index.css";
 
 const Layout = ({ children }) => {
-  const [isSplashVisible, setSplashVisible] = useState(true);
+  const [isSplashVisible, setSplashVisible] = useState(false);
   const router = useRouter();
 
   const activeRoute = router?.pathname;
