@@ -181,22 +181,21 @@ const Sketch = ({ layout }) => {
   };
 
   return (
-    <div>
-      {layout && (
-        <Stage width={layout.width} height={layout.height}>
-          <Layer>
-            {notes?.map((note, index) => (
-              <Circle
-                key={index}
-                {...note}
-                radius={50}
-                fill="red"
-                onClick={(e) => handleOnNoteClick(e, index)}
-              />
-            ))}
-          </Layer>
-        </Stage>
-      )}
+    <div className="w-full h-full">
+      <Stage width={layout.width} height={layout.height}>
+        <Layer>
+          {notes?.map((note, index) => (
+            <Circle
+              key={index}
+              {...note}
+              radius={50}
+              fill="red"
+              onClick={(e) => handleOnNoteClick(e, index)}
+              onTap={(e) => handleOnNoteClick(e, index)}
+            />
+          ))}
+        </Layer>
+      </Stage>
     </div>
   );
 };
