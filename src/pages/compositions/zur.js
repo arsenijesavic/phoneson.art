@@ -79,7 +79,7 @@ function intersections(a, b) {
   // ];
 }
 
-const Sketch = () => {
+const Sketch = ({ layout }) => {
   const [effects, setEffects] = useState();
 
   useEffect(() => {
@@ -131,6 +131,7 @@ const Sketch = () => {
   const requestRef = React.useRef();
 
   const updateNotes = (prevNotes) => {
+    console.log(layout);
     const notes = prevNotes.map((note) => ({
       ...note,
       y: note.y + 1,
@@ -146,7 +147,7 @@ const Sketch = () => {
 
     if (r < prob) {
       const newNote = {
-        x: Math.floor(Math.random() * 1000 - 50) + 50,
+        x: Math.floor(Math.random() * layout.width - 50) + 50,
         y: 0,
         radius: 50,
       };
@@ -155,7 +156,8 @@ const Sketch = () => {
       //   const isOverlaping = intersections(note, newNote);
       //   console.log(isOverlaping);
       // });
-      // notes.push(newNote);
+
+      notes.push(newNote);
     }
 
     return notes;
@@ -180,26 +182,36 @@ const Sketch = () => {
 
   return (
     <div>
-      <input type="range" onChange={onMove} min="0" max="1000" />
-
-      <Stage width={1000} height={1000}>
-        <Layer>
-          {notes.map((note, index) => (
-            <Circle
-              key={index}
-              {...note}
-              radius={50}
-              fill="red"
-              onClick={(e) => handleOnNoteClick(e, index)}
-            />
-          ))}
-        </Layer>
-      </Stage>
+      {layout && (
+        <Stage width={layout.width} height={layout.height}>
+          <Layer>
+            {notes?.map((note, index) => (
+              <Circle
+                key={index}
+                {...note}
+                radius={50}
+                fill="red"
+                onClick={(e) => handleOnNoteClick(e, index)}
+              />
+            ))}
+          </Layer>
+        </Stage>
+      )}
     </div>
   );
 };
 
 export default ({ composition }) => {
+  const wrapRef = useRef();
+  const [layout, setLayout] = useState();
+
+  useEffect(() => {
+    const width = wrapRef.current.offsetWidth;
+    const height = wrapRef.current.offsetHeight;
+
+    setLayout({ width, height });
+  }, [wrapRef]);
+
   return (
     <div className="text-gray-100 max-w-screen-lg mx-auto min-h-screen pb-48">
       <header className="py-4">
@@ -218,7 +230,7 @@ export default ({ composition }) => {
           <div>
             <h1 className="text-gray-100 text-2xl leading-none">
               {/* {composition.name} */}
-              Zur
+              Švajc
             </h1>
             {/* <ul>
               {composition.compositors.map((composer, index) => (
@@ -233,7 +245,9 @@ export default ({ composition }) => {
         </div>
       </header>
 
-      <Sketch />
+      <div className="w-full h-screen" ref={wrapRef}>
+        {layout && <Sketch layout={layout} />}
+      </div>
     </div>
   );
 };
