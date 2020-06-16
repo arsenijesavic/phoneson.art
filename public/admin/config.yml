@@ -12,22 +12,37 @@ media_folder: public/images
 public_folder: /images
 
 collections:
-  - name: "pages"
-    label: "Pages"
-    files:
-      - file: "content/about/index.md"
-        label: "About"
-        name: "about"
-        fields:
-          - {
-              label: "_type",
-              name: "_type",
-              widget: "hidden",
-              default: "about",
-            }
-          - { label: "Headline", name: "headline", widget: "string" }
-          - { label: "Subheadline", name: "subheadline", widget: "text" }
-          - { label: "Body", name: "body", widget: "markdown" }
+  - name: composers
+    label: Composers
+    label_singular: "Composer"
+    folder: content/composers
+    create: true
+    slug: "{{name}}"
+    media_folder: /public/images
+    public_folder: /images
+    fields:
+      - label: "_type"
+        name: "_type"
+        widget: "hidden"
+        default: "composers"
+      - label: Slug
+        name: slug
+        widget: string
+      - label: Name
+        name: name
+        widget: string
+      - label: "Photo"
+        name: "photo"
+        widget: "image"
+      - label: Country
+        name: country
+        widget: string
+      - label: Website
+        name: website
+        widget: string
+      - label: Biography
+        name: biography
+        widget: text
 
   - name: compositions
     label: Compositions
@@ -67,34 +82,19 @@ collections:
         name: "instructions"
         widget: "markdown"
 
-  - name: composers
-    label: Composers
-    label_singular: "Composer"
-    folder: content/composers
-    create: true
-    slug: "{{name}}"
-    media_folder: /public/images
-    public_folder: /images
-    fields:
-      - label: "_type"
-        name: "_type"
-        widget: "hidden"
-        default: "composers"
-      - label: Slug
-        name: slug
-        widget: string
-      - label: Name
-        name: name
-        widget: string
-      - label: "Photo"
-        name: "photo"
-        widget: "image"
-      - label: Country
-        name: country
-        widget: string
-      - label: Website
-        name: website
-        widget: string
-      - label: Biography
-        name: biography
-        widget: text
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "content/about/index.md"
+        label: "About"
+        name: "about"
+        fields:
+          - {
+              label: "_type",
+              name: "_type",
+              widget: "hidden",
+              default: "about",
+            }
+          - { label: "Headline", name: "headline", widget: "string" }
+          - { label: "Subheadline", name: "subheadline", widget: "text" }
+          - { label: "Body", name: "body", widget: "markdown" }
