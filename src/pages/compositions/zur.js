@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { get } from "lib/api";
 import Konva from "konva";
-import { Stage, Layer, Group, Circle } from "react-konva";
-import { Howl, Howler } from "howler";
+import { Stage, Layer, Circle } from "react-konva";
+import { Howl } from "howler";
 import * as Tone from "tone";
 
 import useMousePosition from "hooks/useMousePosition";
+import * as tome from "chromotome";
 
 // import useDeviceMotion from "hooks/useDeviceMotion";
 
@@ -82,22 +83,43 @@ function intersections(a, b) {
 }
 
 const Sketch = ({ layout }) => {
-  const mouse = useMousePosition();
-
+  // const mouse = useMousePosition();
+  const [palette] = useState(tome.get());
   const [effects, setEffects] = useState();
 
   useEffect(() => {
-    const delayFeed = new Tone.Signal(0.2, Tone.Frequency);
-    const delay = new Tone.PingPongDelay("4n", delayFeed.value).toMaster();
+    const synth = new Tone.AMSynth().toMaster();
 
-    const player = new Tone.Player("/assets/drone.wav").toMaster();
-    player.autostart = true;
-    player.loop = true;
+    const keyboard = document.querySelector("tone-keyboard");
+    keyboard?.addEventListener("noteon", (e) => {
+      console.log("here");
+      synth.triggerAttack(e.detail.name);
+    });
 
-    player.connect(delay);
+    // document.querySelector("tone-keyboard").addEventListener("noteoff", (e) => {
+    //   synth.triggerRelease();
+    // });
 
-    setEffects({ delay, delayFeed, player });
+    // const delayFeed = new Tone.Signal(0.2, Tone.Frequency);
+    // const delay = new Tone.PingPongDelay("4n", delayFeed.value).toMaster();
+    // const delay = new Tone.FeedbackDelay({
+    //   feedback: 0.3 + Math.random() / 30,
+    //   wet: 0,
+    //   delayTime: 10 + Math.random() * 2,
+    // });
+    // const dist = new Tone.Distortion().toMaster();
+    // const player = new Tone.Player("/assets/drone.wav").toMaster();
+    // player.autostart = true;
+    // player.loop = true;
+    // player.connect(delay);
+    // setEffects({ delay, player });
   }, []);
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    console.log(value);
+    effects.delay.wet.value = value;
+  };
 
   const [notes, setNotes] = useState([]);
   const requestRef = React.useRef();
@@ -119,6 +141,7 @@ const Sketch = ({ layout }) => {
         x: Math.floor(Math.random() * layout.width - 50) + 50,
         y: 0,
         radius: Math.floor(Math.random() * 50),
+        fill: palette.colors[Math.floor(Math.random() * palette.colors.length)],
       };
 
       // notes.forEach((note) => {
@@ -149,21 +172,30 @@ const Sketch = ({ layout }) => {
   };
 
   return (
-    <div>
+    <>
+      <input
+        type="range"
+        name=""
+        id=""
+        min="0"
+        max="1"
+        step="0.01"
+        onChange={handleChange}
+      />
       <Stage width={layout.width} height={layout.height}>
         <Layer>
           {notes?.map((note, index) => (
             <Circle
               key={index}
               {...note}
-              fill="red"
+              // fill="red"
               onClick={(e) => handleOnNoteClick(e, index)}
               onTap={(e) => handleOnNoteClick(e, index)}
             />
           ))}
         </Layer>
       </Stage>
-    </div>
+    </>
   );
 };
 

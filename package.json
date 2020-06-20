@@ -13,6 +13,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "chromotome": "^1.17.3",
     "framer-motion": "2.0.0-beta.41",
     "howler": "^2.2.0",
     "konva": "^6.0.0",
