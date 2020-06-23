@@ -77,7 +77,6 @@ export default useDeviceMotion;
 
 //   try {
 //     window.addEventListener("devicemotion", handle, true);
-//     console.log("devicemotion");
 //   } catch (error) {
 //     console.log(error);
 //   }

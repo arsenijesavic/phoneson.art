@@ -7,3 +7,7 @@ photo: "/images/05-the-upgrade-maja-bosnic.jpg"
 compositors:
   - Maja Bosnić
 ---
+
+do this
+then that
+dsada
