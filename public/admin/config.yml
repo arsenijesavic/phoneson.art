@@ -82,6 +82,38 @@ collections:
         name: "instructions"
         widget: "markdown"
 
+  - name: performers
+    label: Performers
+    label_singular: "Performer"
+    folder: content/performers
+    create: true
+    slug: "{{name}}"
+    media_folder: /public/images
+    public_folder: /images
+    fields:
+      - label: "_type"
+        name: "_type"
+        widget: "hidden"
+        default: "composers"
+      - label: Slug
+        name: slug
+        widget: string
+      - label: Name
+        name: name
+        widget: string
+      - label: "Photo"
+        name: "photo"
+        widget: "image"
+      - label: Country
+        name: country
+        widget: string
+      - label: Website
+        name: website
+        widget: string
+      - label: Biography
+        name: biography
+        widget: text
+
   - name: "pages"
     label: "Pages"
     files:

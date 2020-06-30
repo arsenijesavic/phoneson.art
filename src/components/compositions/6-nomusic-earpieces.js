@@ -1,23 +1,20 @@
-import React, { useEffect, useState, useRef } from "react";
-import * as Tone from "tone";
+import React, { useEffect, useRef, useState } from "react";
 
 const formatTime = (s) => {
   return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + ~~s;
 };
 
 export default () => {
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [progress, setProgress] = useState(0);
-
-  const [isPlaying, setIsPlaying] = useState(false);
   const trackRef = useRef();
+  const [currentTime, setCurrentTime] = useState(null);
+  const [duration, setDuration] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (trackRef.current) {
-      //(e.target.value * dur) / 100;
-      setDuration(trackRef.current.duration);
       setCurrentTime(trackRef.current.currentTime);
+      setDuration(trackRef.current.duration);
     }
   }, [trackRef]);
 
@@ -26,7 +23,7 @@ export default () => {
       trackRef.current.play();
       setIsPlaying(true);
     } catch (error) {
-      console.log("ERROR", error);
+      console.error("ERROR", error);
     }
   };
 
@@ -35,7 +32,7 @@ export default () => {
       trackRef.current.pause();
       setIsPlaying(false);
     } catch (error) {
-      console.log("ERROR", error);
+      console.error("ERROR", error);
     }
   };
 
@@ -95,13 +92,13 @@ export default () => {
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 text-center">
-        {currentTime !== "NaN" && (
+        {duration && (
           <p className="text-gray-300 p-4">
             {formatTime(currentTime)} / {formatTime(duration)}
           </p>
         )}
 
-        <progress className="w-full" id="file" max="100" value={progress} />
+        <progress className="w-full h-6" id="file" max="100" value={progress} />
       </div>
     </div>
   );

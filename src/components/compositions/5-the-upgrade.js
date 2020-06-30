@@ -1,17 +1,18 @@
 import React, { useEffect, useRef } from "react";
 
 export default () => {
+  const videoRef = useRef();
   const [isPlaying, setIsPlaying] = React.useState(false);
 
-  const videoRef = useRef();
-
   useEffect(() => {
-    document.addEventListener("fullscreenchange", function (e) {
+    document.addEventListener("fullscreenchange", (e) => {
+      videoRef.current.currentTime = 0;
       setIsPlaying((isPlaying) => !isPlaying);
     });
-    // return () => {
-    //   document.removeEventListener("fullscreenchange");
-    // };
+
+    return () => {
+      document.removeEventListener("fullscreenchange");
+    };
   }, [setIsPlaying]);
 
   const playVideo = () => {
@@ -52,12 +53,14 @@ export default () => {
             />
           </svg>
         </button>
+
         <video
-          style={{ visibility: isPlaying ? "visible" : "hidden" }}
-          ref={videoRef}
-          // className="w-full h-full object-cover absolute top-0 left-0"
           controls={true}
+          preload={true}
+          ref={videoRef}
           src="/assets/5-the-upgrade/lampa.mp4"
+          className="absolute"
+          style={{ visibility: isPlaying ? "visible" : "hidden" }}
         />
       </div>
     </div>

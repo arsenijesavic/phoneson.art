@@ -2,32 +2,35 @@ import React from "react";
 
 export default () => {
   return (
-    <div className="text-gray-100 min-h-screen">
+    <div className="px-8 text-gray-100 py-4">
       <div className="flex flex-row flex-wrap mt-6">
-        <button className="p-4 w-full sm:w-auto bg-green-500" id="btnPlayPause">
+        <button
+          className="px-16 py-4 w-full sm:w-auto sm:mr-6 bg-green-500"
+          id="btnPlayPause"
+        >
           Play
         </button>
-        <button className="p-4 w-1/2 sm:w-auto" id="btnToggle1">
+        <button className="p-4 w-1/2 sm:w-auto sm:mr-6" id="btnToggle1">
           &lt;&lt;Chord
         </button>
-        <button className="p-4 w-1/2 sm:w-auto" id="btnToggle0">
+        <button className="p-4 w-1/2 sm:w-auto sm:mr-6" id="btnToggle0">
           Chord&gt;&gt;
         </button>
-        <button className="p-4 w-1/2 sm:w-auto" id="btnToggle3">
+        <button className="p-4 w-1/2 sm:w-auto sm:mr-6" id="btnToggle3">
           &lt;&lt;Interval
         </button>
-        <button className="p-4 w-1/2 sm:w-auto" id="btnToggle2">
+        <button className="p-4 w-1/2 sm:w-auto sm:mr-6" id="btnToggle2">
           Interval&gt;&gt;
         </button>
       </div>
 
       <br />
       <div
-        className="w-full bg-gray-500 p-4"
+        className="w-full bg-gray-600 p-4"
         id="touchsurface"
         style={{ height: "500px" }}
       >
-        <p className="text-base uppercase">Swipe Panel</p>
+        <p className="text-base uppercase text-gray-200">Swipe Panel</p>
       </div>
 
       <script

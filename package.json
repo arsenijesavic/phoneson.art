@@ -16,7 +16,7 @@
     "chromotome": "^1.17.3",
     "framer-motion": "2.0.0-beta.41",
     "howler": "^2.2.0",
-    "konva": "^6.0.0",
+    "konva": "^7.0.1",
     "next": "^9.4.4",
     "next-compose-plugins": "^2.2.0",
     "next-offline": "^5.0.2",
@@ -31,7 +31,7 @@
   "devDependencies": {
     "glob": "^7.1.6",
     "gray-matter": "^4.0.2",
-    "groq-js": "^0.1.5",
+    "groq-js": "0.1.5",
     "postcss-preset-env": "^6.7.0",
     "tailwindcss": "^1.4.6"
   }

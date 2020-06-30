@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { get } from "lib/api";
 
 //
@@ -25,7 +25,7 @@ const compositions = {
 
 const Header = ({ name, compositors, onBack }) => {
   return (
-    <header className="border-none flex items-center pb-4">
+    <header className="flex items-center p-4 border-none ">
       <div className="pr-4 cursor-pointer" onClick={onBack}>
         <svg
           width="32"
@@ -106,14 +106,14 @@ const InstructionModal = ({ body, isOpen, onClose }) => {
 
 export default ({ data }) => {
   const router = useRouter();
-  const [isInstructionOpen, setInstructionOpen] = useState(false);
-
+  const [isInstructionOpen, setInstructionOpen] = useState(true);
   if (!data) return null;
+
   const { slug, name, compositors, body } = data;
   const Composition = compositions[slug] ? compositions[slug] : null;
 
   return (
-    <div className="w-full min-h-screen flex flex-col p-4">
+    <div className="w-full min-h-screen flex flex-col">
       <Header
         name={name}
         compositors={compositors}
@@ -138,8 +138,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const [data] = await get(
-    `*[_type == 'composition' && slug == '/compositions/${params.slug}']{
+  const data = await get(
+    `*[_type == 'composition' && slug == '/compositions/${params.slug}'][0]{
       ...,
       "compositors": *[_type == 'composers' && name in ^.compositors[]]
     }`

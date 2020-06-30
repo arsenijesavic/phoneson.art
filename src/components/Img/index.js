@@ -16,20 +16,18 @@ import React from "react";
 //   padding-top: calc(5 / 4 * 100%);
 // }
 
-const Img = ({ aspectRatio, src }) => {
+const Img = ({ aspectRatio, src, style }) => {
   return (
     <div
       style={{
         height: "0",
         overflow: "hidden",
         position: "relative",
-        // paddingTop: `56.25%`,
-        // calc(${aspectRatio} * 100%)
         paddingBottom: `calc(100% / ${aspectRatio})`,
       }}
     >
-      <div className="w-full h-full absolute top-0 left-0 rounded-lg overflow-hidden">
-        <img className="image-full" src={src} alt="" />
+      <div className="w-full h-full absolute top-0 left-0 rounded-20">
+        <img className="image-full rounded-20" src={src} alt="" style={style} />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-// import { isMobile, isAndroid, isIOS } from "react-device-detect";
+import { isAndroid, isIOS, isMobileOnly } from "react-device-detect";
 
 const android = [
   {
@@ -99,7 +99,7 @@ const ios = [
       },
       {
         icon: `https://is1-ssl.mzstatic.com/image/thumb/Purple117/v4/70/a2/a1/70a2a185-1323-4cb3-d8de-b60773b2107f/mzl.vmtkkukh.jpg/460x0w.jpg`,
-        name: "Night club strobe light-synced with your music",
+        name: "Night Club Strobe Light",
         link: `https://apps.apple.com/us/app/night-club-strobe-light-synced-with-your-music/id1128598578`,
         platfrom: "ios",
       },
@@ -172,7 +172,7 @@ const ios = [
       },
       {
         icon: `https://lh3.googleusercontent.com/KL3JcgIHhA8sQ9FhvvBBWxeVE52tfkUoTyD2Ztc4H_XHxTsrslnUcDzi_t1QqcrakKs=s360-rw`,
-        name: "Say It Backwards App / Reverse Speech Recorder",
+        name: "Say It Backwards",
         link: `https://apps.apple.com/us/app/say-it-backwards-app-lite/id1066924497`,
         platfrom: "ios",
       },
@@ -182,60 +182,70 @@ const ios = [
 
 export default () => {
   return (
-    <div className="px-8 text-gray-200 min-h-screen">
-      <div className="mt-6">
-        <h3 className="text-3xl font-bold">Andorid</h3>
-        <ul className="flex flex-wrap">
-          {android.map((inst, i) => (
-            <li key={i} className="mt-6 w-6/12 sm:w-4/12">
-              <p className="text-base">{inst.name}</p>
+    <div className="px-8 text-gray-100 flex flex-wrap py-4">
+      <div className="w-full sm:w-6/12 sm:pr-6">
+        {!isMobileOnly && <h3 className="text-3xl font-bold">Andorid</h3>}
 
-              <ul className="flex">
-                {inst.apps.map((app, index) => (
-                  <li key={index} className="mt-4 mr-8">
-                    <a href={app.link} target="_tab">
-                      <div className="inline-flex flex-col justify-center items-center">
-                        <img
-                          className="w-16 h-16 sm:w-24 sm:h-24 rounded-full overflow-hidden"
-                          src={app.icon}
-                          alt={app.name}
-                        />
-                      </div>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <div></div>
-            </li>
-          ))}
-        </ul>
+        {(isAndroid || !isMobileOnly) && (
+          <ul className="w-full">
+            {android.map((inst, i) => (
+              <li
+                key={i}
+                className={`mt-${i === 0 ? "2" : "6"} flex justify-between`}
+              >
+                <p className="text-base uppercase self-center">{inst.name}:</p>
+
+                <ul className="flex">
+                  {inst.apps.map((app, index) => (
+                    <li key={index} className="mr-4">
+                      <a href={app.link} target="_tab">
+                        <div className="inline-flex flex-col justify-center items-center">
+                          <img
+                            className="w-20 h-20 object-cover rounded-full overflow-hidden"
+                            src={app.icon}
+                            alt={app.name}
+                          />
+                        </div>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
+      <div className="w-full sm:w-6/12 sm:pl-6">
+        {!isMobileOnly && <h3 className="text-3xl font-bold">iOS</h3>}
 
-      <div className="mt-6">
-        <h3 className="text-3xl font-bold">iOS</h3>
-        <ul className="flex flex-wrap">
-          {ios.map((inst, i) => (
-            <li key={i} className="mt-6 w-6/12 sm:w-4/12">
-              <p className="text-base">{inst.name}</p>
-              <ul className="flex">
-                {inst.apps.map((app, index) => (
-                  <li key={index} className="mt-4 mr-8">
-                    <a href={app.link} target="_tab">
-                      <div className="inline-flex flex-col justify-center items-center">
-                        <img
-                          className="w-16 h-16 sm:w-24 sm:h-24 rounded-full overflow-hidden"
-                          src={app.icon}
-                          alt={app.name}
-                        />
-                      </div>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <div></div>
-            </li>
-          ))}
-        </ul>
+        {(isIOS || !isMobileOnly) && (
+          <ul className="w-full">
+            {ios.map((inst, i) => (
+              <li
+                key={i}
+                className={`mt-${i === 0 ? "2" : "6"} flex justify-between`}
+              >
+                <p className="text-base uppercase self-center">{inst.name}:</p>
+
+                <ul className="flex">
+                  {inst.apps.map((app, index) => (
+                    <li key={index} className="mr-4">
+                      <a href={app.link} target="_tab">
+                        <div className="inline-flex flex-col justify-center items-center">
+                          <img
+                            className="w-20 h-20 object-cover rounded-full overflow-hidden"
+                            src={app.icon}
+                            alt={app.name}
+                          />
+                        </div>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

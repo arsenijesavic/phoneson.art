@@ -1,25 +1,39 @@
-import React, { forwardRef, useState } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import { get } from "lib/api";
 
 // import styled from "styled-components";
 
-const Trigger = ({ title, src, background, color }) => {
+const Trigger = ({ title, src, background, color, size, type }) => {
+  const [isPlaying, setIsPlaying] = React.useState(false);
   const sound = React.createRef();
 
   const _handlePress = () => {
-    sound.current.currentTime = 0;
-    sound.current.play();
+    if (!isPlaying) {
+      sound.current.currentTime = 0;
+      sound.current.play();
+      setIsPlaying(true);
+    }
+
+    if (type === "ONE_SHOOT") {
+      sound.current.currentTime = 0;
+      sound.current.play();
+    }
+
+    if (type === "SONG" && !isPlaying) {
+      sound.current.currentTime = 0;
+      sound.current.play();
+      setIsPlaying(true);
+    }
   };
 
   return (
     <button
-      style={{ background, color, minWidth: "50%" }}
-      className="text-center text-4xl flex justify-center items-center flex-1 bg-red-500 text-black"
+      style={{ background, color, minWidth: "50%", ...size }}
+      className="flex-1 flex justify-center items-center text-center text-4xl border-2 border-black"
       onClick={_handlePress}
     >
       {title}
-      <audio ref={sound} src={src} />
+      <audio ref={sound} src={src} onEnded={() => setIsPlaying(false)} />
     </button>
   );
 };
@@ -30,6 +44,7 @@ const data = [
     background: "#ED247B",
     color: "white",
     src: "/assets/7-menuer4phones/A/0.mp3",
+    type: "ONE_SHOOT",
   },
 
   {
@@ -37,6 +52,7 @@ const data = [
     background: "white",
     color: "#ED247B",
     src: "/assets/7-menuer4phones/A/3.mp3",
+    type: "ONE_SHOOT",
   },
 
   {
@@ -44,12 +60,14 @@ const data = [
     background: "#FB932D",
     color: "white",
     src: "/assets/7-menuer4phones/A/1.mp3",
+    type: "ONE_SHOOT",
   },
   {
     title: "5",
     background: "white",
     color: "#FB932D",
     src: "/assets/7-menuer4phones/A/4.mp3",
+    type: "ONE_SHOOT",
   },
 
   {
@@ -57,6 +75,7 @@ const data = [
     color: "white",
     background: "#B153E9",
     src: "/assets/7-menuer4phones/A/2.mp3",
+    type: "ONE_SHOOT",
   },
 
   {
@@ -64,6 +83,7 @@ const data = [
     color: "#B153E9",
     background: "white",
     src: "/assets/7-menuer4phones/A/5.mp3",
+    type: "ONE_SHOOT",
   },
 
   // {
@@ -80,69 +100,78 @@ const data2 = [
     background: "#DC3245",
     color: "white",
     src: "/assets/7-menuer4phones/B/0.mp3",
+    type: "ONE_SHOOT",
   },
   {
     title: "4",
     background: "white",
     color: "#DC3245",
     src: "/assets/7-menuer4phones/B/3.mp3",
+    type: "ONE_SHOOT",
   },
   {
     title: "2",
     background: "#696591",
     color: "white",
     src: "/assets/7-menuer4phones/B/1.mp3",
+    type: "ONE_SHOOT",
   },
   {
     title: "5",
     background: "white",
     color: "#696591",
     src: "/assets/7-menuer4phones/B/4.mp3",
+    type: "ONE_SHOOT",
   },
   {
     title: "3",
     background: "#1A9BBC",
     color: "white",
     src: "/assets/7-menuer4phones/B/2.mp3",
+    type: "ONE_SHOOT",
   },
   {
     title: "6",
     background: "white",
     color: "#1A9BBC",
     src: "/assets/7-menuer4phones/B/5.mp3",
+    type: "ONE_SHOOT",
   },
 ];
 
 const data3 = [
   {
     title: "The End",
-    background: "white",
-    color: "#1A9BBC",
+    background: "#1A9BBC",
+    color: "white",
     src: "/assets/7-menuer4phones/C/J.S.Bach - Menuet.mp3",
+    type: "SONG",
+    size: {
+      // width: "128px",
+      // height: "128px",
+      // paddingBottom: "56%",
+    },
   },
 ];
 
-export default ({ composition }) => {
-  const router = useRouter();
+export default () => {
   const [selectedTab, setSelectedTab] = React.useState(0);
 
   return (
     <div className="w-full flex-1 flex flex-col items-stretch">
-      <header className="py-4">
-        <div className="flex-1">
-          <ul className="flex bg-gray-900 text-gray-100 text-center">
-            {["Set A", "Set B", "Set C"].map((name, index) => (
-              <li
-                className={`flex-1 p-4 cursor-pointer border-red-500 ${
-                  index === selectedTab && "border-b-2"
-                } `}
-                onClick={() => setSelectedTab(index)}
-              >
-                {name}
-              </li>
-            ))}
-          </ul>
-        </div>
+      <header>
+        <ul className="flex border-gray-900 text-gray-100 text-center">
+          {["Set A", "Set B", "Set C"].map((name, index) => (
+            <li
+              className={`flex-1 p-4 cursor-pointer border-teal-500 ${
+                index === selectedTab && "border-b-2"
+              } `}
+              onClick={() => setSelectedTab(index)}
+            >
+              {name}
+            </li>
+          ))}
+        </ul>
       </header>
 
       {/* SoundBoard */}
@@ -160,9 +189,11 @@ export default ({ composition }) => {
       )}
 
       {selectedTab === 2 && (
-        <div id="keys" className="flex-1 flex flex-wrap items-stretch">
-          {data3 &&
-            data3.map((byte, index) => <Trigger key={index} {...byte} />)}
+        <div id="keys" className="flex-1 flex flex-wrap justify-center p-16">
+          <div className="w-full sm:w-6/12 inline-flex">
+            {data3 &&
+              data3.map((byte, index) => <Trigger key={index} {...byte} />)}
+          </div>
         </div>
       )}
     </div>

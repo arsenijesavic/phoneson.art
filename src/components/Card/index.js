@@ -13,14 +13,9 @@ const Card = ({ id, name, compositors, photo, onClick }) => {
               className="title-container"
               layoutId={`title-container-${id}`}
             >
-              <ul>
+              <ul className="font-regular text-base text-gray-400 uppercase">
                 {compositors.map((composer, index) => (
-                  <li
-                    key={index}
-                    className="font-regular text-base text-gray-400 uppercase"
-                  >
-                    {composer.name}
-                  </li>
+                  <li key={index}>{composer.name}</li>
                 ))}
               </ul>
               <h2 className="font-extrabold text-3xl leading-none mt-2 text-gray-100">

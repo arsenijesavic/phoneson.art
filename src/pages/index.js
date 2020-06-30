@@ -6,6 +6,21 @@ import Layout from "components/Layout";
 import Card from "components/Card";
 import Composition from "components/Composition";
 
+const List = ({ data, selectedId, onSelect }) => {
+  return (
+    <ul className="card-list mb-24 px-8">
+      {data.map((card) => (
+        <Card
+          key={card.id}
+          {...card}
+          isSelected={card.id === selectedId}
+          onClick={() => onSelect(card.id)}
+        />
+      ))}
+    </ul>
+  );
+};
+
 export default ({ compositions }) => {
   const [selectedId, setSelectedId] = React.useState(-1);
   const selectedComposition = compositions.find((_) => _.id === selectedId);
@@ -50,18 +65,3 @@ export async function getStaticProps() {
     },
   };
 }
-
-const List = ({ data, selectedId, onSelect }) => {
-  return (
-    <ul className="card-list mb-48 p-8">
-      {data.map((card) => (
-        <Card
-          key={card.id}
-          {...card}
-          isSelected={card.id === selectedId}
-          onClick={() => onSelect(card.id)}
-        />
-      ))}
-    </ul>
-  );
-};

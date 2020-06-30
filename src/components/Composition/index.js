@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const Composiiton = ({
   id,
@@ -41,31 +42,28 @@ const Composiiton = ({
 
         <motion.div className="text-gray-100 w-full" animate>
           <div className="w-full px-4">
-            <a
-              href={slug}
-              className="block text-center mt-6 w-full mx-auto bg-green-500 hover:bg-green-400 text-white font-bold p-4 border-b-4 border-green-700 hover:border-green-500 rounded"
-            >
-              Perform
-            </a>
+            <Link href={slug}>
+              <a className="block text-center mt-6 w-full mx-auto bg-green-500 hover:bg-green-400 text-white font-bold p-4 border-b-4 border-green-700 hover:border-green-500 rounded">
+                Perform
+              </a>
+            </Link>
           </div>
-          {/* <button className="btn">Perform</button> */}
 
           <div className="flex flex-col sm:flex-row space-between p-4 sm:p-10">
             <div className="flex-1 order-last sm:order-first">
-              <h3 className="text-xs uppercase">Composers:</h3>
               <ul className="flex flex-row mt-6">
                 {compositors.map((composer, index) => (
                   <li key={index}>
                     <a href={composer.slug}>
                       <div className="flex cursor-pointer">
                         <img
-                          className="h-16 w-16 rounded-full mr-6"
+                          className="h-16 w-16 rounded-full mr-6 object-cover"
                           src={composer.photo}
                           alt=""
                         />
                         <div>
                           <p className="font-regular text-2xl text-gray-100 hover:text-indigo-500">
-                            {composer.name}
+                            by {composer.name}
                           </p>
                           <p className="font-regular text-base text-gray-500">
                             {composer.country}
