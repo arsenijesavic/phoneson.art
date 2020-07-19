@@ -2,9 +2,18 @@ import React from "react";
 import Head from "next/head";
 import "../styles/index.css";
 
-export default ({ Component, pageProps }) => {
+import { AnimatePresence, motion } from "framer-motion";
+
+export default ({ Component, pageProps, router }) => {
   const title = `PHONES:ON – new music with smartphones`;
   const description = `PHONES:ON is an interactive concert of new music and sound installations that all allow or specifically require different ways of using smartphones in the performance. Thus, smartphones serve as a source of sound, display scores, send and receive instructions, conduct, play music, illuminate the performer’s faces, take photos, play videos and use various applications.`;
+
+  const animations = {
+    exit: { opacity: 0 },
+    inital: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
+
   return (
     <>
       <Head>
@@ -26,30 +35,43 @@ export default ({ Component, pageProps }) => {
         <meta name="twitter:creator" content="" />
 
         <link
-          rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📞</text></svg>"
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
         />
-
-        {/* <link rel="icon" type="image/png" href="/static/images/favicon.ico" />
-        <link rel="apple-touch-icon" href="/static/images/favicon.ico" />
-        <link rel="stylesheet" href="" /> */}
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
 
         <meta property="og:image" content="" />
         <meta name="twitter:image" content="" />
         <link rel="canonical" href="" />
 
-        {/* <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js" /> */}
         <script
           type="module"
           src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"
         />
         <script
-          nomodule=""
+          noModule=""
           src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"
         />
       </Head>
 
-      <Component {...pageProps} />
+      <AnimatePresence exitBeforeEnter={true}>
+        <motion.div key={router.route} {...animations}>
+          <Component {...pageProps} />
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 };

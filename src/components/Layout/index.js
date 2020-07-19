@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Navigation = () => {
   const router = useRouter();
@@ -136,6 +136,37 @@ const Navigation = () => {
   );
 };
 
+const Footer = () => {
+  return (
+    <footer className="max-w-screen-xl mx-auto px-8 sm:px-16 text-gray-700">
+      <div className="py-8 flex items-center justify-between sm:flex-row flex-col">
+        <p className="text-sm text-gray-500 sm:py-2 sm:mt-0 mt-4">
+          © 2020 PHONES:ON —
+          <a
+            href="https://arsenijesavic.com"
+            className="text-gray-600 ml-1"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            by Arsenije Savić
+          </a>
+        </p>
+
+        <p className="text-sm text-gray-500 sm:py-2 sm:mt-0 mt-4">
+          <a
+            href="https://zabuna.org/"
+            className="text-gray-600 ml-1 uppercase"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Zabuna association
+          </a>
+        </p>
+      </div>
+    </footer>
+  );
+};
+
 const SplashScreen = () => {
   return (
     <div className="w-full h-full bg-black text-white absolute top-0 left-0 right-0 z-50">
@@ -165,6 +196,7 @@ const Layout = ({ children, splash = false }) => {
     <div className="w-full min-h-screen">
       <Navigation />
       <main className="w-full h-full">{children}</main>
+      <Footer />
       {isSplashVisible && <SplashScreen />}
     </div>
   );

@@ -11,12 +11,12 @@ export default () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    if (trackRef.current) {
-      setCurrentTime(trackRef.current.currentTime);
-      setDuration(trackRef.current.duration);
-    }
-  }, [trackRef]);
+  // useEffect(() => {
+  //   if (trackRef.current) {
+  //     setCurrentTime(trackRef.current.currentTime);
+  //     setDuration(trackRef.current.duration);
+  //   }
+  // }, [trackRef]);
 
   const playTrack = () => {
     try {
@@ -76,30 +76,36 @@ export default () => {
             </svg>
           </button>
         )}
-
-        <audio
-          style={{ visibility: "hidden" }}
-          ref={trackRef}
-          controls={true}
-          src="/assets/6-nomusic-earpieces/David Helbich - NO MUSIC - earpieces (remix 2) (1).mp3"
-          onTimeUpdate={(e) => {
-            const currentTime = e.target.currentTime;
-            const progress = (currentTime / duration) * 100;
-            setCurrentTime(e.target.currentTime);
-            setProgress(progress);
-          }}
-        />
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 text-center">
         {duration && (
           <p className="text-gray-300 p-4">
-            {formatTime(currentTime)} / {formatTime(duration)}
+            {formatTime(currentTime)} / {duration && formatTime(duration)}
           </p>
         )}
 
         <progress className="w-full h-6" id="file" max="100" value={progress} />
       </div>
+
+      <audio
+        // style={{ visibility: "hidden" }}
+        ref={trackRef}
+        controls={false}
+        src="/assets/6-nomusic-earpieces/David Helbich - NO MUSIC - earpieces (remix 2) (1).mp3"
+        // preload="metadata"
+        onLoadedMetadata={() => {
+          // console.log("done");
+          setCurrentTime(trackRef.current.currentTime);
+          setDuration(trackRef.current.duration);
+        }}
+        onTimeUpdate={(e) => {
+          const currentTime = e.target.currentTime;
+          const progress = (currentTime / duration) * 100;
+          setCurrentTime(e.target.currentTime);
+          setProgress(progress);
+        }}
+      />
     </div>
   );
 };

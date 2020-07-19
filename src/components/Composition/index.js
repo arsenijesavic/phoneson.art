@@ -26,13 +26,13 @@ const Composiiton = ({
             <ul>
               {compositors.map((composer, index) => (
                 <li key={index}>
-                  <p className="font-regular text-base text-gray-400 uppercase">
+                  <p className="font-regular text-xl text-gray-400 uppercase">
                     {composer.name}
                   </p>
                 </li>
               ))}
             </ul>
-            <h2 className="font-extrabold text-4xl leading-none mt-2 text-gray-100">
+            <h2 className="font-extrabold text-3xl sm:text-4xl leading-none mt-2 text-gray-100">
               {name}
             </h2>
           </motion.div>
@@ -55,17 +55,18 @@ const Composiiton = ({
                 {compositors.map((composer, index) => (
                   <li key={index}>
                     <a href={composer.slug}>
-                      <div className="flex cursor-pointer">
+                      <div className="flex items-center group hover:cursor-pointer">
                         <img
-                          className="h-16 w-16 rounded-full mr-6 object-cover"
+                          className="h-20 w-20 rounded-full mr-6 object-cover"
                           src={composer.photo}
-                          alt=""
+                          alt={composer.name}
                         />
+
                         <div>
-                          <p className="font-regular text-2xl text-gray-100 hover:text-indigo-500">
+                          <p className="font-regular text-xl text-gray-100 group-hover:text-indigo-500">
                             by {composer.name}
                           </p>
-                          <p className="font-regular text-base text-gray-500">
+                          <p className="font-regular text-base text-gray-500 group-hover:text-indigo-800">
                             {composer.country}
                           </p>
                         </div>

@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { get } from "lib/api";
 
-//
 // import VolunteerChorus from "components/compositions/1-volunteer-chorus";
 import OneBitFlow from "components/compositions/2-one-bit-flow";
 // import SteadyShot from "components/compositions/3-steady-shot";
@@ -12,7 +11,6 @@ import TheUpgrade from "components/compositions/5-the-upgrade";
 import NoMusicEarpieces from "components/compositions/6-nomusic-earpieces";
 import Menuer4Phones from "components/compositions/7-menuer4phones";
 
-//
 const compositions = {
   [`/compositions/volunteer-chorus`]: () => <div></div>,
   [`/compositions/one-bit-flow`]: OneBitFlow,
@@ -37,6 +35,7 @@ const Header = ({ name, compositors, onBack }) => {
           <path d="M9.70711 16.7071C9.31658 17.0976 8.68342 17.0976 8.29289 16.7071L2.29289 10.7071C1.90237 10.3166 1.90237 9.68342 2.29289 9.29289L8.29289 3.29289C8.68342 2.90237 9.31658 2.90237 9.70711 3.29289C10.0976 3.68342 10.0976 4.31658 9.70711 4.70711L5.41421 9H17C17.5523 9 18 9.44772 18 10C18 10.5523 17.5523 11 17 11L5.41421 11L9.70711 15.2929C10.0976 15.6834 10.0976 16.3166 9.70711 16.7071Z" />
         </svg>
       </div>
+
       <div>
         <h1 className="text-gray-100 text-2xl leading-none">{name}</h1>
         <ul>
@@ -113,20 +112,22 @@ export default ({ data }) => {
   const Composition = compositions[slug] ? compositions[slug] : null;
 
   return (
-    <div className="w-full min-h-screen flex flex-col">
-      <Header
-        name={name}
-        compositors={compositors}
-        onBack={() => router.back()}
-      />
+    <div className="max-w-screen-xl mx-auto sm:px-16 text-gray-100">
+      <div className="w-full min-h-screen flex flex-col">
+        <Header
+          name={name}
+          compositors={compositors}
+          onBack={() => router.back()}
+        />
 
-      <Composition {...data} />
+        <Composition {...data} />
 
-      <InstructionModal
-        body={body}
-        isOpen={isInstructionOpen}
-        onClose={() => setInstructionOpen(false)}
-      />
+        <InstructionModal
+          body={body}
+          isOpen={isInstructionOpen}
+          onClose={() => setInstructionOpen(false)}
+        />
+      </div>
     </div>
   );
 };
@@ -137,9 +138,9 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params: { slug } }) {
   const data = await get(
-    `*[_type == 'composition' && slug == '/compositions/${params.slug}'][0]{
+    `*[_type == 'composition' && slug == '/compositions/${slug}'][0]{
       ...,
       "compositors": *[_type == 'composers' && name in ^.compositors[]]
     }`

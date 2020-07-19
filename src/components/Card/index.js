@@ -1,33 +1,36 @@
+import React from "react";
 import { motion } from "framer-motion";
 
-const Card = ({ id, name, compositors, photo, onClick }) => {
+const Card = ({ id, name, compositors, photo }) => {
   return (
-    <li className="card cursor-pointer" onClick={onClick}>
-      <div className="card-content-container">
-        <motion.div className="card-content" layoutId={`card-container-${id}`}>
+    <div className="card-content-container">
+      <motion.div className="card-content" layoutId={`card-container-${id}`}>
+        <motion.div
+          className="card-image-container relative"
+          layoutId={`card-image-container-${id}`}
+        >
           <motion.div
-            className="card-image-container"
-            layoutId={`card-image-container-${id}`}
+            className="title-container group hover:bg-black hover:bg-opacity-75"
+            layoutId={`title-container-${id}`}
           >
-            <motion.div
-              className="title-container"
-              layoutId={`title-container-${id}`}
-            >
-              <ul className="font-regular text-base text-gray-400 uppercase">
-                {compositors.map((composer, index) => (
-                  <li key={index}>{composer.name}</li>
-                ))}
-              </ul>
-              <h2 className="font-extrabold text-3xl leading-none mt-2 text-gray-100">
-                {name}
-              </h2>
-            </motion.div>
-
-            <img className="card-image" src={photo} alt="" />
+            <ul>
+              {compositors.map((composer, index) => (
+                <li key={index}>
+                  <p className="font-regular text-base text-gray-400 uppercase group-hover:text-indigo-700">
+                    {composer.name}
+                  </p>
+                </li>
+              ))}
+            </ul>
+            <h2 className="font-extrabold text-2xl sm:text-3xl leading-none mt-2 text-gray-100 group-hover:text-indigo-400">
+              {name}
+            </h2>
           </motion.div>
+
+          <img className="card-image" src={photo} alt="" />
         </motion.div>
-      </div>
-    </li>
+      </motion.div>
+    </div>
   );
 };
 

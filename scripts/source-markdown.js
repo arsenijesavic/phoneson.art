@@ -3,7 +3,9 @@ const glob = require("glob");
 const { join } = require("path");
 const matter = require("gray-matter");
 
-glob("**/*.md", (error, _files) => {
+glob("**/*.md", (err, _files) => {
+  if (err) console.error("ERROR", err);
+
   const files = _files.filter((_) => _.includes("content"));
   const data = files.map((file) => {
     const _path = join(process.cwd(), file);
@@ -11,9 +13,9 @@ glob("**/*.md", (error, _files) => {
     const { data, content: body } = matter(_md);
 
     return {
-      fileAbsolutePath: _path,
       ...data,
       body,
+      fileAbsolutePath: _path,
     };
   });
 

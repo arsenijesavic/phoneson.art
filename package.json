@@ -1,10 +1,14 @@
 {
   "name": "phoneson-art",
   "version": "1.0.0",
-  "description": "Web site for phoneson project.",
-  "keywords": [],
-  "license": "ISC",
-  "author": "",
+  "description": "Web app for PHONES:ON project.",
+  "keywords": [
+    "music",
+    "phoneson"
+  ],
+  "homepage": "https://phoneson.art/",
+  "license": "MIT",
+  "author": "Arsenije Savić <arsenijesavic@me.com>",
   "main": "index.js",
   "scripts": {
     "build": "next build",
@@ -13,26 +17,19 @@
     "start": "next start"
   },
   "dependencies": {
-    "chromotome": "^1.17.3",
-    "framer-motion": "2.0.0-beta.41",
-    "howler": "^2.2.0",
-    "konva": "^7.0.1",
+    "framer-motion": "2.1.0",
     "next": "^9.4.4",
     "next-compose-plugins": "^2.2.0",
     "next-offline": "^5.0.2",
     "react": "16.13.1",
     "react-device-detect": "^1.13.1",
-    "react-dom": "16.13.1",
-    "react-ionicons": "^3.1.4",
-    "react-konva": "^16.13.0-3",
-    "react-markdown": "^4.3.1",
-    "tone": "^13.8.25"
+    "react-dom": "16.13.1"
   },
   "devDependencies": {
     "glob": "^7.1.6",
     "gray-matter": "^4.0.2",
     "groq-js": "0.1.5",
     "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^1.4.6"
+    "tailwindcss": "^1.5.1"
   }
 }

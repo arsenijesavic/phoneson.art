@@ -6,16 +6,13 @@ import Layout from "components/Layout";
 import Card from "components/Card";
 import Composition from "components/Composition";
 
-const List = ({ data, selectedId, onSelect }) => {
+const List = ({ data, onSelect }) => {
   return (
-    <ul className="card-list mb-24 px-8">
-      {data.map((card) => (
-        <Card
-          key={card.id}
-          {...card}
-          isSelected={card.id === selectedId}
-          onClick={() => onSelect(card.id)}
-        />
+    <ul className="card-list">
+      {data.map((card, index) => (
+        <li className="card cursor-pointer" onClick={() => onSelect(card.id)}>
+          <Card key={index} {...card} />
+        </li>
       ))}
     </ul>
   );
@@ -27,23 +24,22 @@ export default ({ compositions }) => {
 
   return (
     <Layout splash={true}>
-      <AnimateSharedLayout type="crossfade">
-        <List
-          data={compositions}
-          selectedId={selectedId}
-          onSelect={setSelectedId}
-        />
-        <AnimatePresence>
-          {selectedComposition && (
-            <Composition
-              key="item"
-              id={selectedId}
-              {...selectedComposition}
-              onClose={() => setSelectedId(false)}
-            />
-          )}
-        </AnimatePresence>
-      </AnimateSharedLayout>
+      <div className="max-w-screen-xl mx-auto px-8 sm:px-16 text-gray-100 pb-48">
+        <AnimateSharedLayout type="crossfade">
+          <List data={compositions} onSelect={setSelectedId} />
+
+          <AnimatePresence>
+            {selectedComposition && (
+              <Composition
+                key={selectedId}
+                id={selectedId}
+                {...selectedComposition}
+                onClose={() => setSelectedId(-1)}
+              />
+            )}
+          </AnimatePresence>
+        </AnimateSharedLayout>
+      </div>
     </Layout>
   );
 };
