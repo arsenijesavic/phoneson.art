@@ -10,8 +10,8 @@ const List = ({ data, onSelect }) => {
   return (
     <ul className="card-list">
       {data.map((card, index) => (
-        <li className="card cursor-pointer" onClick={() => onSelect(card.id)}>
-          <Card key={index} {...card} />
+        <li key={index} className="card" onClick={() => onSelect(card.id)}>
+          <Card {...card} />
         </li>
       ))}
     </ul>

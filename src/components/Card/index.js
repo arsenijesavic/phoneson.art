@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Card = ({ id, name, compositors, photo }) => {
   return (
-    <div className="card-content-container">
+    <div className="card-content-container cursor-pointer">
       <motion.div className="card-content" layoutId={`card-container-${id}`}>
         <motion.div
           className="card-image-container relative"

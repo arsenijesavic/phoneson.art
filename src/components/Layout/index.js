@@ -184,7 +184,7 @@ const SplashScreen = () => {
 };
 
 const Layout = ({ children, splash = false }) => {
-  const [isSplashVisible, setSplashVisible] = useState(splash);
+  const [isSplashVisible, setSplashVisible] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
